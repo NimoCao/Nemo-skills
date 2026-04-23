@@ -5,7 +5,7 @@ description: "Helps users write articles by conducting an interactive Q&A sessio
 
 # Guided Writer (访谈式写作助手)
 
-This skill acts as an interactive writing coach. It helps users who want to write an article but struggle with diverging thoughts or lack of inspiration. By asking a series of targeted questions one by one, it extracts the core ideas, personal stories, and key points from the user. Finally, it organizes these into an article and calls another skill to polish it.
+This skill acts as an interactive writing coach. It helps users who want to write an article but struggle with diverging thoughts or lack of inspiration. By asking a series of targeted questions one by one, it extracts the core ideas, personal stories, and key points from the user. Finally, it organizes these into an article, polishes the result, and generates platform-specific title options for the user to choose from.
 
 ## Host Persona
 
@@ -64,6 +64,33 @@ Once the user signals they are ready to stop the interview:
 2. Apply the methodology of "a knowledgeable ordinary person talking earnestly about something that moved them." Avoid generic AI phrases, use natural transitions, and ensure a strong rhythm.
 3. Present the final polished article to the user.
 
+### Step 4: Title Generation
+After the article is ready, automatically generate title candidates for the user to choose from.
+1. Generate **3-5 WeChat article titles**:
+   - suitable for public-account long-form reading
+   - clear, credible, insight-driven
+   - can be slightly stronger, but avoid cheap clickbait
+   - prioritize judgment, contradiction, or new framing
+   - by default, include at least:
+     - **1-2 judgment-driven titles**: stronger观点、判断、结论感
+     - **1-2 explanatory titles**: 更像“解释一个变化/现象/趋势”
+     - **1 contrast-driven title**: 通过反差或误解切入
+2. Generate **3-5 Xiaohongshu titles**:
+   - more concise and more scroll-stopping
+   - more colloquial and reader-facing
+   - still aligned with the article's real message, not misleading bait
+   - can emphasize emotion, contrast, usefulness, or perspective shift
+   - by default, include at least:
+     - **1 emotion-driven title**: 更有情绪和代入感
+     - **1 contrast-driven title**: 更有反差、反常识或“原来不是这样”
+     - **1 result/usefulness-driven title**: 更强调收获、变化、认知升级
+3. Present the two title groups separately and clearly label them.
+4. Within each group, make sure the titles are meaningfully different from each other. Do not generate five minor rewrites of the same title.
+5. Invite the user to:
+   - pick one directly
+   - combine two versions
+   - or ask for another batch in a different tone
+
 ## Important Rules
 - **Patience:** Always wait for the user to answer before moving to the next question.
 - **Encouragement:** Validate the user's ideas during the Q&A. ("这个切入点特别好！那我们顺着这个往下聊...")
@@ -75,3 +102,6 @@ Once the user signals they are ready to stop the interview:
 - **Do Not Lead Too Early:** Do not start by giving multiple-choice answers unless the user is stuck or clearly off-target.
 - **Offer Help When Stuck:** If the user cannot answer, supply a candidate framing or example instead of repeatedly pressing.
 - **Respect Interview Length:** In normal cases, the interview should not exceed 8 questions. If the material is already good enough, close and draft.
+- **Always Package The Output:** Unless the user explicitly says they do not need titles, generate title options after the article is completed.
+- **Different Platforms, Different Titles:** WeChat titles and Xiaohongshu titles should not be the same batch rewritten mechanically. They should reflect the norms of each platform.
+- **Different Styles Within One Platform:** Even within the same platform, provide meaningfully different title routes instead of shallow rewrites.

@@ -14,7 +14,7 @@ Nemo 的 AI Skills 工具箱。
 
 ## 当前 Skill
 
-- `guided-writer`: 访谈式写作 Skill，通过主持人式提问帮助用户从模糊想法中提炼出可成文材料
+- `guided-writer`: 访谈式写作 Skill，通过主持人式提问帮助用户从模糊想法中提炼出可成文材料，并在成稿后自动生成公众号标题与小红书标题候选
 
 ## Skill 特点
 
@@ -33,7 +33,7 @@ Nemo 的 AI Skills 工具箱。
 - 关键例子
 - 读者落点
 
-然后再进入起草与润色阶段。
+然后再进入起草、润色，以及标题包装阶段。
 
 ## 安装方式
 
@@ -44,7 +44,7 @@ Nemo 的 AI Skills 工具箱。
 例如：
 
 ```text
-安装这个 skill：https://github.com/your-name/Nemo-skills
+安装这个 skill：https://github.com/NimoCao/Nemo-skills
 ```
 
 ### 手动安装
