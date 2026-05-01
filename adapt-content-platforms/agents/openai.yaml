@@ -1,0 +1,4 @@
+interface:
+  display_name: "全平台内容自适应"
+  short_description: "把长文章一键适配成小红书与微信公众号完整发布内容包。"
+  default_prompt: "请把这篇文章适配成小红书和微信公众号内容包。"
