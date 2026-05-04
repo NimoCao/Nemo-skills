@@ -1,4 +1,4 @@
 interface:
   display_name: "AI 需求校准"
-  short_description: "分析和梳理需求时触发：先理解需求，再查找可参考 skill，最后收束成方案。"
-  default_prompt: "我有一个需求想分析一下，请先说说你听懂了什么，再找找有没有相关 skill 可以参考。"
+  short_description: "分析需求时触发：先理解需求、查找参考 skill，再输出包含关键对象抽象的 PRD。"
+  default_prompt: "我有一个需求想分析一下，请先说说你听懂了什么，再找参考 skill，最后整理成包含关键对象抽象的 PRD。"

@@ -1,13 +1,13 @@
 ---
 name: clarify-ai-demand
-description: Use whenever the user is describing, analyzing, clarifying, sorting out, discussing, or exploring a need, requirement, workflow pain, product idea, Agent idea, automation request, tool request, or Prompt-writing goal. Trigger even if the user only says they want to "分析需求", "梳理需求", "描述需求", "聊聊需求", "看看这个需求", "做个工具", "做个 Agent", or "写个 Prompt". The skill progressively understands the demand, searches for relevant existing skills or references when possible, asks whether found skills match the user's intended outcome, then turns the need into a minimum usable scenario, tool shape, inputs, outputs, boundaries, and next-step Prompt or implementation brief.
+description: Use whenever the user is describing, analyzing, clarifying, sorting out, discussing, or exploring a need, requirement, workflow pain, product idea, Agent idea, automation request, tool request, or Prompt-writing goal. Trigger even if the user only says they want to "分析需求", "梳理需求", "描述需求", "聊聊需求", "看看这个需求", "做个工具", "做个 Agent", or "写个 Prompt". The skill progressively understands the demand, searches for relevant existing skills or references when possible, asks whether found skills match the user's intended outcome, then turns the need into a PRD with a minimum usable scenario, key object abstractions, product flow, inputs, outputs, boundaries, and acceptance criteria.
 ---
 
 # AI 需求校准
 
 ## Overview
 
-This skill helps users avoid rushing into Prompt writing or implementation before the need is clear. It treats AI as a demand-calibration partner: first let AI say what it understood, search for relevant existing skills or references, then use progressive questions to turn a vague wish into a usable tool plan.
+This skill helps users avoid rushing into Prompt writing or implementation before the need is clear. It treats AI as a demand-calibration partner: first let AI say what it understood, search for relevant existing skills or references, then use progressive questions to turn a vague wish into a usable PRD.
 
 Use this skill especially when the user says things like:
 - “我想做一个 AI 工具/Agent，但还没想清楚。”
@@ -21,7 +21,7 @@ Use this skill especially when the user says things like:
 
 ## Core Principle
 
-Do not start by writing the final Prompt, product spec, or implementation plan.
+Do not start by writing the final Prompt, PRD, or implementation plan.
 
 Start by helping the user see what their need actually is.
 
@@ -141,31 +141,117 @@ Output this in one compact block:
 
 The scenario should be small enough to test quickly, but meaningful enough that the user would actually reuse it.
 
-### Step 6: Convert Into A Tool Brief
+### Step 6: Abstract Key Objects Before Writing The PRD
 
-Once the scenario is clear, produce a practical brief:
+Before producing the final PRD, explicitly define the key objects in the product. This is required even for small tools.
+
+The goal is to make the PRD usable by both frontend and backend builders. The objects should be stable enough to become UI modules, data models, API resources, state containers, database tables, or agent memory structures.
+
+Do not leave important concepts as vague nouns. Turn them into named objects with properties and relationships.
+
+Output this section before the PRD:
 
 ```markdown
-工具名称：
-解决的问题：
-目标用户：
-核心流程：
+关键对象抽象：
+1. 对象名：
+   - 定义：
+   - 关键字段/属性：
+   - 状态：
+   - 和其他对象的关系：
+   - 前端如何呈现：
+   - 后端如何存储/处理：
+2. ...
+
+对象关系：
+- A 创建/引用/更新 B
+- B 产生 C
+- C 反馈到 A
+```
+
+Common object types to look for:
+- user roles, accounts, creators, customers, operators
+- tasks, requests, jobs, workflows, sessions
+- source materials, documents, notes, assets, data inputs
+- analysis results, recommendations, drafts, decisions, reports
+- agents, skills, tools, prompts, templates
+- status, feedback, comments, metrics, history
+
+If the product is frontend-heavy, still define backend-facing objects such as persisted records, generated outputs, user settings, and audit/history entries.
+
+If the product is backend-heavy, still define frontend-facing objects such as visible cards, forms, tables, states, empty states, and user actions.
+
+### Step 7: Produce The PRD
+
+Once the scenario and key objects are clear, produce a concise but implementation-ready PRD.
+
+```markdown
+# PRD: [产品/工具名称]
+
+## 1. 背景与问题
+- 用户现在遇到什么问题：
+- 为什么现有做法不够好：
+- 这次第一版只解决什么：
+
+## 2. 目标用户与使用场景
+- 目标用户：
+- 触发时刻：
+- 最小可用场景：
+- 不覆盖的场景：
+
+## 3. 目标与非目标
+- 目标：
+- 非目标：
+
+## 4. 关键对象
+- 对象 A：
+  - 定义：
+  - 字段：
+  - 状态：
+  - 关系：
+- 对象 B：
+  - ...
+
+## 5. 核心用户流程
 1. ...
 2. ...
 3. ...
-输入字段：
+
+## 6. 功能需求
+- 功能 1：
+  - 用户动作：
+  - 系统响应：
+  - 输入：
+  - 输出：
+  - 边界：
+- 功能 2：
+  - ...
+
+## 7. AI / Agent 行为
+- AI 需要理解什么：
+- AI 需要生成/判断什么：
+- AI 不应该做什么：
+- Prompt / Agent 指令草案：
+
+## 8. 数据与状态
+- 需要保存的数据：
+- 关键状态：
+- 历史记录/可追溯信息：
+
+## 9. 验收标准
 - ...
-输出格式：
-- ...
-边界条件：
-- ...
-成功标准：
-- ...
-第一版 Prompt / Agent 指令：
-...
+
+## 10. 可参考 Skill
+- 最接近的是：
+- 可以借鉴：
+- 不适合/需要改造：
+
+## 11. 第一版实现建议
+- 前端优先做：
+- 后端优先做：
+- 可以暂缓：
 ```
 
-If the user wants implementation, continue into code or product design only after this brief is agreed.
+If the user wants implementation, continue into code or product design only after this PRD is agreed.
 
 When relevant skills were found, include a short comparison:
 
@@ -174,7 +260,7 @@ When relevant skills were found, include a short comparison:
 - 最接近的是：
 - 可以借鉴：
 - 不适合/需要改造：
-- 我建议第一版自己做成：
+- 对 PRD 的影响：
 ```
 
 ## Response Style
@@ -184,8 +270,9 @@ When relevant skills were found, include a short comparison:
 - Treat early conclusions as hypotheses, not final answers.
 - Push for concreteness without interrogating the user.
 - Search for relevant skills when the need sounds reusable, and use candidates to help the user confirm the desired outcome.
+- Always abstract key objects before the final PRD. Name the objects clearly and describe how they appear in both frontend and backend thinking.
 - Do not overbuild. Prefer a small useful tool to a grand undefined Agent.
-- When the user asks only for a Prompt, still check whether the demand is clear enough before writing it.
+- When the user asks only for a Prompt, still check whether the demand is clear enough; if the task is product-like, produce a lightweight PRD before the final Prompt.
 
 ## Example
 
@@ -207,4 +294,4 @@ Good response:
 你最卡的是写之前的选题判断，写的时候的表达，还是写完之后的数据复盘？
 ```
 
-After the user answers, continue calibration and only then produce the tool brief or Prompt.
+After the user answers, continue calibration and only then produce the key object abstractions and PRD.
