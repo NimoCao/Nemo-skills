@@ -15,8 +15,24 @@ Nemo 的 AI Skills 工具箱。
 
 - `guided-writer`: 访谈式写作 Skill，通过主持人式提问帮助用户从模糊想法中提炼出可成文材料，并在成稿后自动生成公众号标题与小红书标题候选
 - `adapt-content-platforms`: 全平台内容自适应 Skill，将一篇文章改造成小红书与微信公众号发布包，包括标题、图片方案和平台正文
+- `clarify-ai-demand`: AI 需求校准 Skill，在写 Prompt 或做 Agent 前，先让 AI 渐进式理解、复述和追问需求，把模糊想法收束成可执行的小工具方案
 
 ## Skill 特点
+
+### `clarify-ai-demand`
+
+这是一个用来“先把需求聊明白”的 Skill。
+它适合在用户想做 AI 工具、Agent、Prompt 或自动化流程，但需求还比较模糊时使用。
+
+它不会一上来直接写 Prompt，而是先让 AI 做三件事：
+
+- 复述：先说说它听懂了什么
+- 校准：指出不确定、容易误解和需要追问的地方
+- 收束：把需求变成最小可用场景、工具 brief 和第一版 Prompt / Agent 指令
+
+它的核心理念是：
+
+> 别急着写 Prompt，先让 AI 说说它听懂了什么。
 
 ### `guided-writer`
 
@@ -109,6 +125,9 @@ Nemo-skills/
 │   ├── SKILL.md
 │   ├── agents/
 │   └── references/
+├── clarify-ai-demand/
+│   ├── SKILL.md
+│   └── agents/
 └── guided-writer/
     ├── SKILL.md
     └── references/

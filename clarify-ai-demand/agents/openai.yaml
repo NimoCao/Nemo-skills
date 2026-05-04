@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 需求校准"
+  short_description: "先让 AI 渐进式理解需求，再把模糊想法收束成可执行的小工具方案。"
+  default_prompt: "我有一个模糊需求，先别急着写 Prompt，请帮我校准需求。"
