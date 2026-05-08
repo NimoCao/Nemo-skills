@@ -1,6 +1,6 @@
 ---
 name: "guided-writer"
-description: "Helps users write articles by conducting an interactive Q&A session to gather ideas and inspiration. Once enough info is gathered, drafts the article and invokes the khazix-writer skill to polish and beautify the final output. Invoke when user wants to write an article but lacks inspiration or tends to diverge."
+description: "Helps users write articles by conducting an interactive Q&A session to gather ideas and inspiration. Once enough info is gathered, synthesizes the material and invokes insight-essay-writer to produce the final Nemo-style insight essay, then generates platform-specific title options. Invoke when user wants to write an article but lacks inspiration or tends to diverge."
 ---
 
 # Guided Writer (访谈式写作助手)
@@ -50,19 +50,27 @@ When invoked, strictly follow this step-by-step workflow:
    - the core claim, reader direction, and enough supporting material are already clear enough for a strong draft; or
    - you are approaching the 8-question limit and already have enough to write a solid piece, in which case begin wrapping up instead of opening new branches.
 
-### Step 2: The Drafting Phase
+### Step 2: The Material Synthesis Phase
 Once the user signals they are ready to stop the interview:
 1. Acknowledge the completion of the interview.
-2. Synthesize all the scattered thoughts, stories, and emotions collected during the infinite Q&A into a coherent, structured draft.
+2. Synthesize the scattered thoughts, stories, examples, emotions, and claims collected during the Q&A into a compact article brief.
 3. Use `references/content_methodology.md` to decide which materials matter most and what draft shape best fits the conversation.
 4. Preserve the user's actual judgment instead of replacing it with a cleaner but more generic version.
-5. Present the initial draft outline or the full draft to the user, ensuring it captures the depth of the conversation.
+5. The brief should include:
+   - phenomenon or trigger
+   - core claim
+   - why the claim matters
+   - supporting examples or scenes
+   - tensions, caveats, or opposing view
+   - reader takeaway
+   - phrases from the user worth preserving
 
-### Step 3: The Polish Phase (Invoking `khazix-writer`)
-*(Note: If the `khazix-writer` skill has been deleted or is unavailable, use the general principles of engaging, human-like, conversational writing with strong hooks, short sentences, and emotional resonance to polish the draft directly).*
-1. Inform the user that you will now polish the draft to make it more engaging.
-2. Apply the methodology of "a knowledgeable ordinary person talking earnestly about something that moved them." Avoid generic AI phrases, use natural transitions, and ensure a strong rhythm.
-3. Present the final polished article to the user.
+### Step 3: The Drafting Phase (Invoke `insight-essay-writer`)
+1. Invoke `insight-essay-writer` to turn the article brief into the final draft.
+2. The final draft should follow Nemo's insight-essay style: observation hook, fair acknowledgment, clear judgment, deeper explanation, concrete scenes, moderate paragraph granularity, and a restrained but memorable ending.
+3. Do not duplicate `insight-essay-writer`'s style rules here. Treat this skill as responsible for interviewing and material selection; treat `insight-essay-writer` as responsible for article-level prose and rhythm.
+4. If `insight-essay-writer` is unavailable, use its intended effect as fallback: write a calm, judgment-driven Chinese essay with concrete scenes, restrained literary texture, natural paragraph granularity, and no generic AI phrasing.
+5. Present the final article to the user.
 
 ### Step 4: Title Generation
 After the article is ready, automatically generate title candidates for the user to choose from.

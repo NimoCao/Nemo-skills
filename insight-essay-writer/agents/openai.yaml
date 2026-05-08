@@ -1,0 +1,4 @@
+interface:
+  display_name: "观点文章写作"
+  short_description: "把已有观点、笔记或提纲写成 Nemo 风格的中文判断型文章。"
+  default_prompt: "请把这些想法写成一篇 Nemo 风格的完整观点文章。"
