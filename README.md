@@ -18,8 +18,26 @@ Nemo 的 AI Skills 工具箱。
 - `adapt-content-platforms`: 全平台内容自适应 Skill，将一篇文章改造成小红书、微信公众号与 X/Twitter 发布包，包括标题、封面/正文图片方案、平台正文、英文单帖和 thread
 - `text-card-renderer`: 文字卡片渲染 Skill，将小红书/公众号/X 的金句图、清单图、框架图、对照图等从精确文字直接导出为 SVG 和 PNG，避免 AI 生图导致中文错字
 - `clarify-ai-demand`: AI 需求校准 Skill，用户描述、分析或梳理需求时触发；先让 AI 渐进式理解需求，同时查找可参考的现成 Skill，再把模糊想法收束成包含关键对象抽象的 PRD
+- `aihot`: 中文 AI 资讯查询 Skill，用户询问 AI 日报、AI 热点、模型发布、产品发布、行业动态或论文进展时，直接通过 AI HOT 公开 API 拉取最新信息并整理成中文简报
 
 ## Skill 特点
+
+### `aihot`
+
+这是一个用来查询 AI HOT 中文 AI 资讯的 Skill。
+它适合在用户问“今天 AI 圈有什么”“最近 AI 有什么新东西”“OpenAI/Anthropic/Google 最近发布了什么”“AI 日报”等问题时使用。
+
+它的核心能力是：
+
+- 默认走 AI HOT 精选条目，适合回答宽泛的近期 AI 动态
+- 用户明确说“日报”时，拉取最新或指定日期的 AI 日报
+- 用户明确说“全部 / 完整 / 所有 / 全量”时，拉取完整动态列表
+- 支持按模型发布、产品发布、行业动态、论文研究、技巧观点分类查询
+- 支持关键词搜索，例如 OpenAI、Anthropic、Sora、RAG 等
+
+它的核心理念是：
+
+> 用户问的是现在的 AI 行业事实，就不要凭训练数据脑补，先查一遍实时来源。
 
 ### `clarify-ai-demand`
 
@@ -173,6 +191,8 @@ Nemo-skills/
 │   ├── SKILL.md
 │   ├── agents/
 │   └── references/
+├── aihot/
+│   └── SKILL.md
 ├── clarify-ai-demand/
 │   ├── SKILL.md
 │   └── agents/
